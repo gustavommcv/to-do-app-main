@@ -11,6 +11,13 @@ app.use(cors({
     origin: '*',  
 }));
 
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Welcome to the To-Do Application!',
+        info: 'Navigate to /api for API endpoints.',
+    });
+});
+
 app.use('/api', router);
 
 export default app;
