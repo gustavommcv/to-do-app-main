@@ -6,6 +6,23 @@
         width: 100%;
     }
 
+    &__select {
+        background-color: transparent;
+        border: none;
+        letter-spacing: 2px;
+        width: 100%;
+        max-width: 8rem;
+        color: var(--var-text-color);
+        cursor: pointer;
+
+        text-transform: capitalize;
+
+        option {
+            background-color: var(--var-background-color);
+            color: var(--var-text-color);
+        }
+    }
+
     &__input {
         color: rgba(172, 172, 172, 0.623);
         text-decoration: none;

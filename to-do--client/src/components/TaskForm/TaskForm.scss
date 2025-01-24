@@ -52,6 +52,17 @@
     }
   }
 
+  &__select {
+    cursor: pointer;
+
+    text-transform: capitalize;
+
+      & option {
+          background-color: var(--var-background-color);
+          color: var(--var-text-color);
+      }
+  }
+
   &__button {
     padding: 1.5rem;
     border: none;
