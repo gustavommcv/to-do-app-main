@@ -1,0 +1,31 @@
+# Node.js
+/node_modules/
+/npm-debug.log
+/package-lock.json
+/yarn.lock
+/.env
+
+# API (to-do--api)
+to-do--api/node_modules/
+/to-do--api/.env
+
+# React Client (to-do--client)
+to-do--client/node_modules/
+/to-do--client/.env
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build output
+/dist/
+/build/
+
+# Ignore IDE and editor specific files (exemplo para VSCode)
+.vscode/
+
+# Ignore test coverage reports
+/coverage/
