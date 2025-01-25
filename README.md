@@ -2,6 +2,11 @@
 
 A simple task management project with a Node.js back-end and a React front-end.
 
+## 🖥️ Preview
+![Screenshot 2025-01-24 231402](https://github.com/user-attachments/assets/e4199ea6-4b87-4b7e-8904-e4c0f888bfa2)
+
+![Screenshot 2025-01-24 231418](https://github.com/user-attachments/assets/1f601431-45b3-40b7-874b-b3c24727cfc5)
+
 ## 🚀 Features
 - **API**: Provides endpoints for task management (CRUD).
 - **Client**: User interface to create, edit, and delete tasks.
