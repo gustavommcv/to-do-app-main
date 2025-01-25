@@ -23,8 +23,8 @@ export default function SingleFieldForm({ task, statuses, className }) {
 
             const formData = new FormData(event.target.form);
 
-            if (formData.get('title')) {
-                submit(event.target.form);
+            if (formData.get('status') && (formData.get('title') || formData.get('title') === null)) {
+                return submit(event.target.form);
             } else {
                 window.alert('You must provide a valid title');
                 setTitle(task.title);
