@@ -7,8 +7,6 @@ export default function TaskCreate() {
 
   const actionData = useActionData();
 
-  console.log(actionData)
-
   return <div className='task-page'>
     <TaskForm statuses={statuses} method="post" errors={actionData?.errors} >Create Task:</TaskForm>
   </div>

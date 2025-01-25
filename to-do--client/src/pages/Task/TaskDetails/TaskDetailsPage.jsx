@@ -5,8 +5,6 @@ function TaskDetailsPage() {
 
   const actionData = useActionData();
 
-  console.log(actionData)
-
   const data = useRouteLoaderData('event-details');
   const task = data.task;
   const statuses = data.statuses;
