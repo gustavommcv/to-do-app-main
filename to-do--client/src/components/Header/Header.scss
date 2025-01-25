@@ -1,12 +1,4 @@
 .header {
-    &--light {
-        background-color: #7D91F4;
-    }
-
-    &--dark {
-        background-color: #14014e;
-    }
-
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
 
     height: 20rem;
@@ -15,6 +7,14 @@
 
     display: flex;
     justify-content: center;
+
+    &--light {
+        background-color: #7D91F4;
+    }
+
+    &--dark {
+        background-color: #14014e;
+    }
 
     &__container {
         width: 100%;
