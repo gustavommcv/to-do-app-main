@@ -6,6 +6,7 @@ import ThemeContext from '../../context/themeContext';
 /* eslint-disable react/prop-types */
 export default function SingleFieldForm({ task, statuses, className }) {
     const [status, setStatus] = useState(task.status);
+    const [title, setTitle] = useState(task.title);
     const submit = useSubmit();
 
     const { theme } = useContext(ThemeContext);
@@ -19,7 +20,15 @@ export default function SingleFieldForm({ task, statuses, className }) {
         if (event.type === 'change' || (event.type === 'keydown' && event.key === 'Enter')) {
             event.preventDefault();
             event.target.blur();
-            submit(event.target.form); 
+
+            const formData = new FormData(event.target.form);
+
+            if (formData.get('title')) {
+                submit(event.target.form);
+            } else {
+                window.alert('You must provide a valid title');
+                setTitle(task.title);
+            }
         }
     };
 
@@ -29,7 +38,7 @@ export default function SingleFieldForm({ task, statuses, className }) {
                 className={`single-field-form__select single-field-form__select--${theme}`}
                 id="status"
                 name="status"
-                defaultValue={task.status}
+                value={status}
                 onChange={handleChange}
             >
                 {statuses.map((statusOption) => (
@@ -44,8 +53,9 @@ export default function SingleFieldForm({ task, statuses, className }) {
                 id="title"
                 name="title"
                 type="text"
-                disabled={status === 'completed' ? true : false}
-                defaultValue={task.title}
+                disabled={status === 'completed'}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 onKeyDown={handleChange}
             />
         </Form>
