@@ -11,6 +11,13 @@ export default function TasksList({ tasks, statuses }) {
     const [activeFilter, setActiveFilter] = useState('all');
     const { theme } = useContext(ThemeContext);
 
+    const handleClearCompleted = () => {
+        const proceed = window.confirm('Are you sure you want to delete all completed tasks?');
+        if (proceed) {
+            window.alert('Not Implemented!');
+        }
+    }
+
     const handleDelete = (taskId) => {
         const proceed = window.confirm('Are you sure you want to delete this task?');
         if (proceed) {
@@ -107,9 +114,7 @@ export default function TasksList({ tasks, statuses }) {
                     </div>
 
                     <button
-                        onClick={() => {
-                            window.alert('Not implemented');
-                        }}
+                        onClick={handleClearCompleted}
                         className={`tasks-list__clear-button tasks-list__clear-button--${theme}`}
                     >
                         Clear Completed
