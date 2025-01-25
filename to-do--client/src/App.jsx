@@ -8,10 +8,10 @@ import statusesLoader from "./util/loaders/statusesLoader";
 import newTaskAction from "./util/actions/newTaskAction";
 import editTaskAction from './util/actions/editTaskAction';
 import deleteTaskAction from "./util/actions/deleteTaskAction";
-import ErrorPage from "./pages/shared/ErrorPage";
 import patchTaskAction from "./util/actions/patchTaskAction";
 import ThemeContextProvider from "./context/themeContextProvider";
 import TaskDetailsPage from "./pages/Task/TaskDetails/TaskDetailsPage";
+import ErrorPage from "./pages/shared/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
