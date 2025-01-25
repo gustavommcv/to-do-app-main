@@ -18,8 +18,6 @@ export default function ErrorPage() {
         document.body.classList.add(`theme--${theme}`);
     }, [theme]);
 
-    console.log("Response status: " + error.status);
-
     if (error.status === 500) {
         message = JSON.parse(error.data).message;
     }
