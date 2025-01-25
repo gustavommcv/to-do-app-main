@@ -7,11 +7,11 @@ const seedTasks = async () => {
     try {
         await sequelize.authenticate();
 
-        const taskCount = await Task.count();
-        if (taskCount > 0) {
-            console.log('Tasks already exist in the database. No seed required.');
-            process.exit(0);
-        }
+        // const taskCount = await Task.count();
+        // if (taskCount > 0) {
+        //     console.log('Tasks already exist in the database. No seed required.');
+        //     process.exit(0);
+        // }
 
         for (let i = 0; i < 5; i++) {
             await Task.create({

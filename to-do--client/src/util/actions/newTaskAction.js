@@ -10,17 +10,16 @@ export default async function newTaskAction({ request }) {
         status: data.get('status')
     };
 
-    console.log(taskData);
-
     try {
         const response = await axios.post('http://localhost:3000/api/tasks', taskData);
-
-        if (response.status !== 201) {
-            throw new Error('Failed to create new task');
+        if (response.status === 201) {
+            return redirect('/');
+        }
+    } catch (error) {
+        if (error.response && error.response.status === 400) {
+            return { errors: error.response.data.errors };
         }
 
-        return redirect('/');
-    } catch (error) {
         console.error('Error creating task:', error);
         throw error;
     }

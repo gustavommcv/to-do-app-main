@@ -13,14 +13,15 @@ export default async function editTaskAction({ request, params }) {
 
     try {
         const response = await axios.put(`http://localhost:3000/api/tasks/${taskData.id}`, taskData);
-
-        if (![200, 204, 201].includes(response.status)) {
-            throw new Error('Failed to update task');
+        if (response.status === 201 || response.status === 204 || response.status === 200) {
+            return redirect('/');
         }
-
-        return redirect('/');
     } catch (error) {
-        console.error('Error editing task:', error.message || error);
-        throw new Error('Could not edit the task. Please try again.');
+        if (error.response && error.response.status === 400) {
+            return { errors: error.response.data.errors };
+        }
+        
+        console.error('Error to edit task:', error);
+        throw error;
     }
 }

@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./pages/shared/Layout";
 import HomePage from "./pages/HomePage/HomePage";
-import TaskDetails from "./pages/Task/TaskDetails/TaskDetailsPage";
 import TaskCreate from "./pages/Task/TaskCreate/TaskCreatePage";
 import tasksLoader from "./util/loaders/tasksLoader";
 import detailsLoader from "./util/loaders/detailsLoader";
@@ -12,6 +11,7 @@ import deleteTaskAction from "./util/actions/deleteTaskAction";
 import ErrorPage from "./pages/shared/ErrorPage";
 import patchTaskAction from "./util/actions/patchTaskAction";
 import ThemeContextProvider from "./context/themeContextProvider";
+import TaskDetailsPage from "./pages/Task/TaskDetails/TaskDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -29,11 +29,8 @@ const router = createBrowserRouter([
         id: 'event-details',
         loader: detailsLoader,
         action: editTaskAction,
+        element: <TaskDetailsPage />,
         children: [
-          {
-            path: '',
-            element: <TaskDetails />,
-          },
           {
             path: "delete",
             action: deleteTaskAction
