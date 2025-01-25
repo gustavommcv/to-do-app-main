@@ -1,3 +1,22 @@
+:root {
+  --absolute-position: -580%;
+
+  --var-background-color-light: #FFFFFF;
+  --var-text-color-light: rgba(49, 49, 49, 0.623);
+
+  --var-background-color-dark: #25273C;
+  --var-text-color-dark: rgba(172, 172, 172, 0.623);
+
+  --var-hover-border: rgba(128, 128, 128, 0.5);
+  --var-border: rgba(128, 128, 128, 0.219);
+
+  --var-blink-light-start: rgba(49, 49, 49, 0.8);
+  --var-blink-light-middle: rgba(49, 49, 49, 0.3);
+
+  --var-blink-dark-start: rgba(172, 172, 172, 0.8);
+  --var-blink-dark-middle: rgba(172, 172, 172, 0.3);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -11,5 +30,12 @@ html, body {
 
 body {
   height: 100dvh;
+}
+
+.theme--light {
+  background-color: #DEDEDE;
+}
+
+.theme--dark {
   background-color: #181824;
 }

@@ -1,20 +1,21 @@
-:root {
-    --absolute-position: -580%;
-    --var-background-color: #25273C;
-    --var-text-color: rgba(172, 172, 172, 0.623);
-    --var-hover-border: rgba(128, 128, 128, 0.5);
-    --var-border: rgba(128, 128, 128, 0.219);
-}
-
 .tasks-list {
+    display: flex;
+    flex-direction: column;
     border-collapse: collapse;
     width: 100%;
     height: fit-content;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5px !important;
-    background-color: var(--var-background-color);
-    display: flex;
-    flex-direction: column;
+
+    &--light {
+        background-color: var(--var-background-color-light);
+        color: var(--var-text-color-light);
+    }
+
+    &--dark {
+        background-color: var(--var-background-color-dark);
+        color: var(--var-text-color-dark);
+    }
 
     &__container {
         position: absolute;
@@ -29,7 +30,6 @@
     }
 
     &__create {
-        @extend .tasks-list__shared-button;
         display: flex;
         align-items: center;
         gap: 0.8rem;
@@ -37,6 +37,23 @@
         padding: 1.5rem;
         width: 100%;
         text-align: left;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 2px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+
+        &--light {
+            background-color: var(--var-background-color-light);
+            color: var(--var-text-color-light);
+        }
+
+        &--dark {
+            background-color: var(--var-background-color-dark);
+            color: var(--var-text-color-dark);
+        }
 
         &:hover {
             transform: scale(1.02);
@@ -66,12 +83,32 @@
             display: flex;
             align-items: baseline;
             gap: 0.8rem;
-            color: var(--var-text-color);
+
+            &--light {
+                color: var(--var-text-color-light);
+            }
+
+            &--dark {
+                color: var(--var-text-color-dark);
+            }
         }
 
         &-link {
-            @extend .tasks-list__shared-text-style;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            background-color: transparent;
             border: none;
+            cursor: pointer;
+
+            &--light {
+                color: var(--var-text-color-light);
+            }
+
+            &--dark {
+                color: var(--var-text-color-dark);
+            }
 
             &:hover {
                 border-bottom: 1px solid var(--var-hover-border);
@@ -86,7 +123,22 @@
 
     &__filter-button,
     &__clear-button {
-        @extend .tasks-list__shared-text-style;
+        text-decoration: none;
+        font-weight: 500;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+
+        &--light {
+            color: var(--var-text-color-light);
+        }
+
+        &--dark {
+            color: var(--var-text-color-dark);
+        }
 
         &:hover {
             border-bottom: 1px solid var(--var-hover-border);
@@ -95,42 +147,16 @@
 
     &__filter-button--active {
         color: #0d49e0;
+        font-weight: bold;
+        border-bottom: 1px solid #0d49e0;
     }
 
     &__count {
         cursor: default !important;
-        @extend .tasks-list__shared-text-style;
+        font-weight: 500;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
     }
-}
-
-.tasks-list__shared-text-style {
-    color: var(--var-text-color);
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-    background-color: transparent;
-    border-bottom: 1px solid transparent;
-    cursor: pointer;
-
-    border: none;
-    border-bottom: 1px solid transparent;
-}
-
-.tasks-list__shared-button {
-    background-color: var(--var-background-color);
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    color: var(--var-text-color);
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 2px;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-.tasks-list__filter-button--active {
-    color: #0d49e0;
-    font-weight: semi-bold;
-    border-bottom: 1px solid #0d49e0;
 }

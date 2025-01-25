@@ -11,6 +11,7 @@ import editTaskAction from './util/actions/editTaskAction';
 import deleteTaskAction from "./util/actions/deleteTaskAction";
 import ErrorPage from "./pages/shared/ErrorPage";
 import patchTaskAction from "./util/actions/patchTaskAction";
+import ThemeContextProvider from "./context/themeContextProvider";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,10 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  
+  return <ThemeContextProvider>
+    <RouterProvider router={router} />
+  </ThemeContextProvider>;
 }
 
 export default App;

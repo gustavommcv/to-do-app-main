@@ -19,7 +19,7 @@ export default function ErrorPage() {
     }
 
     return <>
-        <Header title='To Do'></Header>
+        <Header></Header>
         <div>
             <h1>{title}</h1>
             <p>{message}</p>
