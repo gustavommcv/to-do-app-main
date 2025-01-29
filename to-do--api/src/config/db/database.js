@@ -16,6 +16,9 @@ const sequelize = new Sequelize({
         await sequelize.authenticate();
         console.log("Database connected!");
         
+        // Importing associations before Sync
+        await import("../../models/associations.js");
+
         // Models Sync
         await sequelize.sync();
         console.log("All models were synchronized successfully.");

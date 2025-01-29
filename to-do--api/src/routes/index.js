@@ -1,5 +1,7 @@
 import express from 'express';
 import tasksRouter from './tasksRoutes.js';
+import authRouter from './authRoutes.js';
+import { authenticate } from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
 // Default route
@@ -20,5 +22,6 @@ router.get('/', (req, res) => {
 
 // Task routes
 router.use('/tasks', tasksRouter);
+router.use('/auth', authRouter);
 
 export default router;
