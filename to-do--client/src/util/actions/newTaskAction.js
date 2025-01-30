@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { redirect } from 'react-router-dom';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default async function newTaskAction({ request }) {
     const data = await request.formData();
 
@@ -11,9 +13,11 @@ export default async function newTaskAction({ request }) {
     };
 
     try {
-        const response = await axios.post('http://localhost:3000/api/tasks', taskData);
+        const response = await axios.post(`${apiUrl}/tasks`, taskData, {
+            withCredentials: true
+        });
         if (response.status === 201) {
-            return redirect('/');
+            return redirect('/tasks');
         }
     } catch (error) {
         if (error.response && error.response.status === 400) {

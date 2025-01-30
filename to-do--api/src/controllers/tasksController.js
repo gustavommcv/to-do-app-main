@@ -1,33 +1,41 @@
 import { matchedData, validationResult } from "express-validator";
 import TaskStatus from "../models/enums/TaskStatus.js";
-import Task from "../models/task.js";
+import Task from "../models/Task.js";
 
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.findAll();
+    const userId = req.user.id;
+
+    const tasks = await Task.findAll({
+      where: { userId }
+    });
+    
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ error: "Error fetching tasks", message: error.message });
   }
-}
+};
 
-export const getTask = async(req, res) => {
+
+export const getTask = async (req, res) => {
   try {
-    const errorsResult = validationResult(req);
-
-    if (!errorsResult.isEmpty()) { return res.status(400).send({ errors: errorsResult.array() }) }
-
+    const userId = req.user.id;
     const { taskId } = matchedData(req);
 
-    const task = await Task.findByPk(taskId);
+    const task = await Task.findOne({
+      where: { id: taskId, userId }
+    });
 
-    if (!task) { return res.status(404).json({ error: "Task not found" }); }
+    if (!task) {
+      return res.status(404).json({ error: "Task not found" });
+    }
 
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ error: "Error fetching task", message: error.message });
   }
-}
+};
+
 
 export const getTaskStatus = async (req, res) => {
   try {
@@ -40,34 +48,43 @@ export const getTaskStatus = async (req, res) => {
 
 export const postTask = async (req, res) => {
   try {
-      const errorsResult = validationResult(req);
-
-      if (!errorsResult.isEmpty()) { return res.status(400).send({ errors: errorsResult.array() }); }
-
-      const task = matchedData(req);
-
-      console.log(task)
-      
-      await Task.create(task);
-      
-      res.status(201).json({ message: `Task created: ${task.title}`, task: task });
-    } catch (error) {
-      res.status(500).json({ error: "Error creating task", message: error.message });
+    const errorsResult = validationResult(req);
+    if (!errorsResult.isEmpty()) {
+      return res.status(400).send({ errors: errorsResult.array() });
     }
-}
+
+    const userId = req.user.id;
+    const task = matchedData(req);
+
+    const newTask = await Task.create({
+      ...task,
+      userId
+    });
+
+    res.status(201).json({ message: `Task created: ${newTask.title}`, task: newTask });
+  } catch (error) {
+    res.status(500).json({ error: "Error creating task", message: error.message });
+  }
+};
 
 export const putTask = async (req, res) => {
   try {
+    const userId = req.user.id;
     const { taskId, ...task } = matchedData(req);
 
     const errorsResult = validationResult(req);
+    if (!errorsResult.isEmpty()) {
+      return res.status(400).send({ errors: errorsResult.array() });
+    }
 
-    if (!errorsResult.isEmpty()) { return res.status(400).send({ errors: errorsResult.array() }); }
+    const selectedTask = await Task.findOne({
+      where: { id: taskId, userId }
+    });
 
-    const selectedTask = await Task.findByPk(taskId);
+    if (!selectedTask) {
+      return res.status(404).json({ error: "Task not found" });
+    }
 
-    if (!selectedTask) { return res.status(404).json({ error: "Task not found", message: error.message }); }
-  
     await selectedTask.update({
       title: task.title,
       description: task.description,
@@ -76,25 +93,32 @@ export const putTask = async (req, res) => {
 
     await selectedTask.save();
 
-    res.status(201).json({ message: `Task updated`, updatedTask: selectedTask });
-
+    res.status(200).json({ message: `Task updated`, updatedTask: selectedTask });
   } catch (error) {
     res.status(500).json({ error: "Error editing task", message: error.message });
   }
-}
+};
+
 
 export const patchTask = async (req, res) => {
   try {
+    const userId = req.user.id;
     const errorsResult = validationResult(req);
-    if (!errorsResult.isEmpty()) { return res.status(400).json({ errors: errorsResult.array() }); }
+    if (!errorsResult.isEmpty()) {
+      return res.status(400).json({ errors: errorsResult.array() });
+    }
 
     const { taskId } = matchedData(req);
     const updateFields = matchedData(req, { includeOptionals: true });
     delete updateFields.taskId;
 
-    const task = await Task.findByPk(taskId);
+    const task = await Task.findOne({
+      where: { id: taskId, userId }
+    });
 
-    if (!task) { return res.status(404).json({ error: 'Task not found' }); }
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
 
     await task.update(updateFields);
     await task.save();
@@ -107,23 +131,26 @@ export const patchTask = async (req, res) => {
 
 export const deleteTask = async (req, res) => {
   try {
+    const userId = req.user.id;
+    const { taskId } = matchedData(req);
 
     const errorsResult = validationResult(req);
+    if (!errorsResult.isEmpty()) {
+      return res.status(400).json({ errors: errorsResult.array() });
+    }
 
-    if (!errorsResult.isEmpty()) { return res.status(404).json({ errors: errorsResult.array() }) }
+    const task = await Task.findOne({
+      where: { id: taskId, userId }
+    });
 
-    const { taskId } = matchedData(req);
-    
-    const task = await Task.findByPk(taskId);
-    
     if (!task) {
       return res.status(404).json({ error: 'Task not found' });
     }
-    
+
     await task.destroy();
     res.status(200).json({ message: `Task deleted successfully: ${task.title}` });
-    
   } catch (error) {
     res.status(500).json({ error: 'Error deleting task', message: error.message });
   }
-}
+};
+

@@ -33,7 +33,7 @@ export default function SingleFieldForm({ task, statuses, className }) {
     };
 
     return (
-        <Form className="single-field-form" method="patch" action={`/${task.id}/patch`}>
+        <Form className="single-field-form" method="patch" action={`/tasks/${task.id}/patch`}>
             <select
                 className={`single-field-form__select single-field-form__select--${theme}`}
                 id="status"

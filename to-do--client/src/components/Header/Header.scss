@@ -8,6 +8,16 @@
     display: flex;
     justify-content: center;
 
+    &__s-link {
+        &--light {
+            color: #ffffff;
+        }
+        
+        &--dark {
+            color: #fefefed0;
+        }
+    }
+
     &--light {
         background-color: #7D91F4;
     }
@@ -47,6 +57,11 @@
             transform: scale(105%);
             transition: transform 0.3s ease, color 0.3s ease;
         }
+
+        &__container {
+            display: flex;
+            align-items: baseline;
+        }
     }
 
     a {
@@ -57,7 +72,6 @@
     &__button {
         border: none;
         background-color: transparent;
-        color: rgb(80, 80, 80);
         font-size: 1.2rem;
         text-transform: uppercase;
         border-bottom: 2px solid rgb(73, 73, 73);
@@ -66,6 +80,14 @@
 
         &:hover {
             color: rgb(59, 59, 59)
+        }
+
+        &--light {
+            color: #ffffff;
+        }
+        
+        &--dark {
+            color: #fefefed0;
         }
     }
 

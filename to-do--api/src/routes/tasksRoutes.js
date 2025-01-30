@@ -5,21 +5,22 @@ import { body, param } from 'express-validator';
 
 import { deleteTask, getTask, getTasks, getTaskStatus, patchTask, postTask, putTask } from '../controllers/tasksController.js';
 import TaskStatus from '../models/enums/TaskStatus.js';
+import { authenticate } from '../middlewares/authMiddleware.js';
 
 const tasksRouter = express.Router();
 
-tasksRouter.get('/', getTasks);
+tasksRouter.get('/', authenticate, getTasks);
 tasksRouter.get('/task-status', getTaskStatus);
 
-tasksRouter.get('/:taskId', param('taskId').notEmpty().withMessage('Task id cannot be empty').isUUID().withMessage('Task id must be an UUID'), getTask);
+tasksRouter.get('/:taskId', authenticate, param('taskId').notEmpty().withMessage('Task id cannot be empty').isUUID().withMessage('Task id must be an UUID'), getTask);
 
-tasksRouter.post('/', [
+tasksRouter.post('/', authenticate, [
   body('title').exists().withMessage('You must provide a title').notEmpty().withMessage('Title cannot be empty'),
     body('description').exists().withMessage('You must provide a description'),
     body('status').exists().withMessage('You must provide a status').notEmpty().withMessage('Status cannot be empty').isIn(Object.values(TaskStatus)).withMessage(`Status must be one of: ${Object.values(TaskStatus).join(', ')}`)
 ], postTask);
 
-tasksRouter.put('/:taskId', [
+tasksRouter.put('/:taskId', authenticate, [
     param('taskId').notEmpty().withMessage('Task id cannot be empty').isUUID().withMessage('Task id must be an UUID'),
     body('title').exists().withMessage('You must provide a title').notEmpty().withMessage('Title cannot be empty'),
     body('description').exists().withMessage('You must provide a description'),
@@ -27,7 +28,7 @@ tasksRouter.put('/:taskId', [
 ], putTask);
 
 tasksRouter.patch(
-    '/:taskId', [
+    '/:taskId', authenticate, [
       param('taskId')
         .notEmpty()
         .withMessage('Task id cannot be empty')
@@ -43,6 +44,6 @@ tasksRouter.patch(
         .withMessage(`Status must be one of: ${Object.values(TaskStatus).join(', ')}`),
 ], patchTask);
 
-tasksRouter.delete('/:taskId', param('taskId').notEmpty().withMessage('Task id cannot be empty').isUUID().withMessage('Task id must be an UUID'), deleteTask);
+tasksRouter.delete('/:taskId', authenticate, param('taskId').notEmpty().withMessage('Task id cannot be empty').isUUID().withMessage('Task id must be an UUID'), deleteTask);
 
 export default tasksRouter;

@@ -1,9 +1,13 @@
 import axios from "axios";
 
-export default async function tasksLoader() {
-    const tasks = await axios.get('http://localhost:3000/api/tasks');
+const apiUrl = import.meta.env.VITE_API_URL;
 
-    const statuses = await axios.get('http://localhost:3000/api/tasks/task-status');
+export default async function tasksLoader() {
+    const tasks = await axios.get(`${apiUrl}/tasks`, {
+        withCredentials: true
+    });
+
+    const statuses = await axios.get(`${apiUrl}/tasks/task-status`);
 
     const response = {
         tasks: tasks.data,
