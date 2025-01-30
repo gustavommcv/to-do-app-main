@@ -8,9 +8,9 @@ A simple task management project with a Node.js back-end and a React front-end.
 ![Screenshot 2025-01-24 231418](https://github.com/user-attachments/assets/1f601431-45b3-40b7-874b-b3c24727cfc5)
 
 ## 🚀 Features
-- **API**: Provides endpoints for task management (CRUD).
+- **API**: Provides endpoints for task management (CRUD) and user authentication.
 - **Client**: User interface to create, edit, and delete tasks.
-- **Database**: Integration with MariaDB for data persistence.
+- **Database**: Integration with MariaDB/Postgres for data persistence.
 
 ---
 
