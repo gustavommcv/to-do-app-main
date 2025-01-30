@@ -4,12 +4,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const sequelize = new Sequelize({
-    dialect: 'mariadb',
+    dialect: 'postgres',
     host: process.env.DB_HOST,
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT || 5432,
+    // logging: false,
 });
+
 
 (async () => {
     try {
@@ -20,7 +23,7 @@ const sequelize = new Sequelize({
         await import("../../models/associations.js");
 
         // Models Sync
-        await sequelize.sync();
+        await sequelize.sync({alter: true});
         console.log("All models were synchronized successfully.");
     } catch (error) {
         console.error("Unable to connect to the database:", error);

@@ -22,7 +22,7 @@ export default async function loginAction({ request }) {
             return redirect('/');
         }
     } catch (error) {
-        if (error.response && error.response.status === 400) {
+        if (error.response && (error.response.status === 400 || error.response.status === 401)) {
             return { errors: error.response.data.errors };
         }
 

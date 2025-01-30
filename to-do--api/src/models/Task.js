@@ -11,16 +11,22 @@ const Task = sequelize.define("Task", {
   title: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.TEXT, allowNull: true },
   status: {
-    type: DataTypes.ENUM(...Object.values(TaskStatus)),
+    type: DataTypes.STRING,
     allowNull: false,
     defaultValue: TaskStatus.PENDING,
+    validate: {
+      isIn: [Object.values(TaskStatus)],
+    },
   },
   userId: {
     type: DataTypes.UUID,
     allowNull: false,
-    references: { model: "Users", key: "id" },
+    references: { model: "users", key: "id" },
     onDelete: "CASCADE",
   },
+}, {
+  tableName: "tasks",
+  timestamps: false,
 });
 
 export default Task;
