@@ -8,10 +8,14 @@
 # API (to-do--api)
 to-do--api/node_modules/
 /to-do--api/.env
+/to-do--api/cert.pem
+/to-do--api/key.pem
 
 # React Client (to-do--client)
 to-do--client/node_modules/
 /to-do--client/.env
+/to-do--client/cert.pem
+/to-do--client/key.pem
 
 # Logs
 *.log

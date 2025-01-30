@@ -1,9 +1,11 @@
 import { redirect } from 'react-router-dom';
 import axios from "axios";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function getAuthToken() {
     try {
-        const response = await axios.get('http://localhost:3000/api/auth/token', {
+        const response = await axios.get(`${apiUrl}/auth/token`, {
             withCredentials: true
         });
 

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { redirect } from "react-router-dom";
 
-export default async function signupAction({ request, params }) {
+const apiUrl = import.meta.env.VITE_API_URL;
+
+export default async function signupAction({ request }) {
     const data = await request.formData();
 
     const user = {
@@ -10,7 +12,7 @@ export default async function signupAction({ request, params }) {
     }
 
     try {
-        const response = await axios.post('http://localhost:3000/api/auth/signup', user, {
+        const response = await axios.post(`${apiUrl}/auth/signup`, user, {
             withCredentials: true
         });
 

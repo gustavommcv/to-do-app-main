@@ -1,6 +1,8 @@
 import axios from "axios";
 import { redirect } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default async function loginAction({ request }) {
     const data = await request.formData();
 
@@ -10,7 +12,7 @@ export default async function loginAction({ request }) {
     }
 
     try {
-        const response = await axios.post('http://localhost:3000/api/auth/login', user, {
+        const response = await axios.post(`${apiUrl}/auth/login`, user, {
             withCredentials: true
         });
 

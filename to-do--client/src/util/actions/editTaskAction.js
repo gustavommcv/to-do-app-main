@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { redirect } from 'react-router-dom';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default async function editTaskAction({ request, params }) {
     const data = await request.formData();
 
@@ -12,7 +14,7 @@ export default async function editTaskAction({ request, params }) {
     };
 
     try {
-        const response = await axios.put(`http://localhost:3000/api/tasks/${taskData.id}`, taskData, {
+        const response = await axios.put(`${apiUrl}/tasks/${taskData.id}`, taskData, {
             withCredentials: true
         });
         if (response.status === 201 || response.status === 204 || response.status === 200) {
