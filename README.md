@@ -50,6 +50,7 @@ npm install
   DB_USER=your_user
   DB_PASSWORD=your_password
   DB_NAME=your_database_name
+  JWT_SECRET=your_secret
 
   PORT=3000
   ```
