@@ -24,7 +24,7 @@ export default function TasksList({ tasks, statuses }) {
             setCurrentTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
             submit(null, {
                 method: 'delete',
-                action: `/${taskId}/delete`,
+                action: `/tasks/${taskId}/delete`,
             });
         }
     };
@@ -36,7 +36,7 @@ export default function TasksList({ tasks, statuses }) {
 
     return (
         <div className="tasks-list__container">
-            <Link to="/create" className={`tasks-list__create tasks-list__create--${theme}`}>
+            <Link to="create" className={`tasks-list__create tasks-list__create--${theme}`}>
                 <svg
                     className="tasks-list__icon tasks-list__icon--create"
                     xmlns="http://www.w3.org/2000/svg"

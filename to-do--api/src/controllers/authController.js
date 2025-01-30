@@ -13,6 +13,16 @@ const createToken = (id) => {
     });
 }
 
+export const getToken = (req, res) => {
+  const token = req.cookies.jwt;
+  
+  if (!token) {
+      return res.status(401).json({ message: "Token not found" });
+  }
+
+  res.json({ token });
+};
+
 export const postLogin = async (req, res) => {
   try {
     const errorsResult = validationResult(req);
@@ -33,10 +43,10 @@ export const postLogin = async (req, res) => {
     }
 
     const token = createToken(user.id);
-      res.cookie('jwt', token, {
-          httpOnly: true,
-          maxAge: maxAge * 1000
-      })
+    res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: maxAge * 1000
+    })
 
     res.status(200).json({ message: 'Login successful', token });
   } catch (error) {

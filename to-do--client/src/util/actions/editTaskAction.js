@@ -12,9 +12,11 @@ export default async function editTaskAction({ request, params }) {
     };
 
     try {
-        const response = await axios.put(`http://localhost:3000/api/tasks/${taskData.id}`, taskData);
+        const response = await axios.put(`http://localhost:3000/api/tasks/${taskData.id}`, taskData, {
+            withCredentials: true
+        });
         if (response.status === 201 || response.status === 204 || response.status === 200) {
-            return redirect('/');
+            return redirect('/tasks');
         }
     } catch (error) {
         if (error.response && error.response.status === 400) {

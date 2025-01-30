@@ -27,6 +27,11 @@ export default function ErrorPage() {
         message = 'Could not find resource or page';
     }
 
+    if (error.status === 401) {
+        title = 'Validation failed!';
+        message = 'Invalid token'
+    }
+
     return (
     <>
         <Header />

@@ -11,9 +11,11 @@ export default async function newTaskAction({ request }) {
     };
 
     try {
-        const response = await axios.post('http://localhost:3000/api/tasks', taskData);
+        const response = await axios.post('http://localhost:3000/api/tasks', taskData, {
+            withCredentials: true
+        });
         if (response.status === 201) {
-            return redirect('/');
+            return redirect('/tasks');
         }
     } catch (error) {
         if (error.response && error.response.status === 400) {

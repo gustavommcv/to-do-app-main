@@ -1,9 +1,62 @@
-.home, .task-page {
-    display: flex;
-    justify-content: center;
+.home-page {
     position: relative;
-    
-    height: fit-content;
-    
-    padding: 1rem 2rem;
+
+    &__container {
+        margin: 0 auto;
+        position: absolute;
+        background-color: transparent;
+        top: var(--absolute-position);
+        width: 100%;
+        max-width: 60rem;
+
+        display: flex;
+        flex-direction: column;
+
+        padding: 2rem;
+
+        height: fit-content;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 5px !important;
+
+        &--light {
+            background-color: var(--var-background-color-light);
+            color: var(--var-text-color-light);
+        }
+
+        &--dark {
+            background-color: var(--var-background-color-dark);
+            color: var(--var-text-color-dark);
+        }
+    }
+
+    &__title {
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    &__login-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    &__link {
+        padding: .6rem 3rem;
+        border: 1px solid var(--var-text-color-dark);
+        border-radius: 5px;
+        text-decoration: none;
+
+        &--light {
+            color: var(--var-text-color-light);
+        }
+
+        &--dark {
+            color: var(--var-text-color-dark);
+        }
+    }
 }

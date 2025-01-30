@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { getLogout, postLogin, postSignup } from '../controllers/authController.js';
+import { getLogout, getToken, postLogin, postSignup } from '../controllers/authController.js';
 import { authenticate } from '../middlewares/authMiddleware.js';
 
 // Using express-validator: https://express-validator.github.io/docs/
@@ -8,6 +8,7 @@ import { authenticate } from '../middlewares/authMiddleware.js';
 const authRouter = express.Router();
 
 authRouter.get('/logout', getLogout);
+authRouter.get('/token', getToken);
 
 authRouter.post('/login', [
   body('email')

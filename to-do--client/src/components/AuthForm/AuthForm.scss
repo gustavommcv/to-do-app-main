@@ -1,0 +1,27 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__button {
+        border: none;
+        cursor: pointer;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+
+        &--light {
+            background-color: var(--var-text-color-light);
+            color: var(--var-background-color-light);
+        }
+    
+        &--dark {
+            background-color: var(--var-text-color-dark);
+            color: var(--var-background-color-dark);
+        }
+
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+}
